@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Ishara & Dilruke — Wedding Invitation</title>
+  <title>Ishara & Dilruk — Wedding Invitation</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
@@ -30,7 +30,7 @@
     background: #fff;
     height: 100vh;
     position: relative;
-    overflow-y: hidden; /* LOCKED until Open Invitation is clicked */
+    overflow-y: hidden; 
     overflow-x: hidden;
     box-shadow: 0 0 60px rgba(0,0,0,0.8);
     scroll-behavior: smooth;
@@ -63,7 +63,50 @@
   }
   #seeInvitationBtn.show { opacity: 1; }
 
-  /* === MUSIC CONTROL === */
+  /* SCROLL INDICATOR ANIMATION */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+
+  .mouse {
+    width: 20px;
+    height: 35px;
+    border: 2px solid #fff;
+    border-radius: 20px;
+    position: relative;
+    margin-bottom: 5px;
+  }
+
+  .mouse::before {
+    content: '';
+    width: 4px;
+    height: 4px;
+    background: #fff;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 6px;
+    border-radius: 50%;
+    animation: scrollWheel 2s infinite;
+  }
+
+  @keyframes scrollWheel {
+    0% { opacity: 1; transform: translate(-50%, 0); }
+    100% { opacity: 0; transform: translate(-50%, 15px); }
+  }
+
+  /* MUSIC CONTROL */
   .music-control {
     position: fixed; 
     bottom: 25px;
@@ -117,7 +160,6 @@
   .countdown span { display: block; font-size: 20px; font-weight: 700; }
   .countdown label { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; }
 
-  /* MAP SECTION */
   .map-section { padding: 60px 20px; text-align: center; background: #fff; }
   .map-container { width: 100%; height: 350px; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.1); margin-bottom: 25px; }
   .map-container iframe { width: 100%; height: 100%; border: 0; }
@@ -156,8 +198,12 @@
     <section class="hero">
       <div class="hero-inner fade-up">
         <div class="top-sub">The Marriage of</div>
-        <div class="couple">Ishara & Dilruke</div>
+        <div class="couple">Ishara & Dilruk</div>
         <div class="date">29 · 01 · 2026</div>
+      </div>
+      <div class="scroll-indicator">
+        <div class="mouse"></div>
+        <span>Scroll</span>
       </div>
     </section>
 
@@ -165,12 +211,12 @@
       <div class="invitation-card fade-up">
         <div class="invitation-inner">
           <p style="font-family: 'Playfair Display'; font-style: italic; font-size: 14px;">We cordially invite you to join us...</p>
-          <div class="names">Ishara <br>& <br>Dilruke</div>
+          <div class="names">Ishara <br>& <br>Dilruk</div>
           <div style="margin: 15px 0; line-height: 1.8; font-size: 13px;">
             Daughter of Mr. & Mrs. Wijerathne<br>Son of Mr. & Mrs. Tissera
           </div>
           <footer style="font-weight: 700; color: #444; margin-top: 15px; font-size: 14px;">
-            Thursday, January 29, 2026<br>09:00 AM - 01:00 PM<br>Courtyard by Marriott, Colombo
+            Thursday, January 29, 2026<br>09:00 AM - 04:00 PM<br>Courtyard by Marriott, Colombo
           </footer>
         </div>
       </div>
@@ -189,10 +235,9 @@
       </div>
     </section>
 
-<section class="map-section">
+    <section class="map-section">
       <h2 style="font-family: 'Great Vibes'; font-size: 38px; color: var(--accent);">Location</h2>
       <p style="margin-bottom: 20px; font-size: 14px;">Courtyard by Marriott, Colombo 02</p>
-      
       <div class="map-container fade-up">
         <iframe 
           width="100%" 
@@ -204,7 +249,6 @@
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.785246739999!2d79.85501867580644!3d6.916301318469588!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae25940c5bb8367%3A0xe72dd1728019c243!2sCourtyard%20by%20Marriott%20Colombo!5e0!3m2!1sen!2slk!4v1715800000000!5m2!1sen!2slk6">
         </iframe>
       </div>
-
       <a href="https://www.google.com/maps/dir/?api=1&destination=Courtyard+by+Marriott+Colombo" 
          target="_blank" 
          class="map-btn">
@@ -297,7 +341,7 @@
     const name = document.getElementById("guestName").value.trim();
     const msg = document.getElementById("guestMessage").value.trim();
     if (name && msg) {
-      window.open(`https://wa.me/94716363959?text=Hi Ishara %26 Dilruke, I'm ${name}. ${msg}`, '_blank');
+      window.open(`https://wa.me/94716363959?text=Hi Ishara %26 Dilruk, I'm ${name}. ${msg}`, '_blank');
     }
   };
 </script>
