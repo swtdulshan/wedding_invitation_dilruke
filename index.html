@@ -20,7 +20,7 @@
     background: #1a1a1a;
     display: flex;
     justify-content: center;
-    overflow: hidden; /* Keeps the laptop screen clean */
+    overflow: hidden; 
   }
 
   /* THE MOBILE FRAME */
@@ -30,8 +30,7 @@
     background: #fff;
     height: 100vh;
     position: relative;
-    /* START LOCKED: No scrolling until button is clicked */
-    overflow-y: hidden; 
+    overflow-y: hidden; /* LOCKED until Open Invitation is clicked */
     overflow-x: hidden;
     box-shadow: 0 0 60px rgba(0,0,0,0.8);
     scroll-behavior: smooth;
@@ -64,11 +63,10 @@
   }
   #seeInvitationBtn.show { opacity: 1; }
 
-  /* === FIXED MUSIC CONTROL === */
+  /* === MUSIC CONTROL === */
   .music-control {
     position: fixed; 
     bottom: 25px;
-    /* Centers relative to the 500px frame on laptop */
     right: calc(50% - 230px); 
     width: 50px;
     height: 50px;
@@ -83,43 +81,31 @@
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
   }
 
-  /* Adjust for actual mobile devices */
   @media (max-width: 500px) {
     .music-control { right: 20px; }
   }
 
-  /* === Hero Section === */
+  /* Content Sections */
   .hero {
     height: 100vh; display: flex; align-items: flex-end; justify-content: center;
     background: url('./dilruke_11.jpeg') center/cover no-repeat; position: relative; text-align: center;
   }
   .hero::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.4); }
   .hero-inner { position: relative; z-index: 2; color: #fff; padding-bottom: 80px; width: 100%; }
-  
   .top-sub { font-family: 'Playfair Display', serif; font-size: 16px; color: var(--muted); letter-spacing: 2px; }
-  .couple {
-    font-family: 'Great Vibes', cursive;
-    font-size: 50px;
-    text-shadow: 0 3px 15px #000;
-    line-height: 1.2;
-    margin: 10px 0;
-  }
+  .couple { font-family: 'Great Vibes', cursive; font-size: 50px; text-shadow: 0 3px 15px #000; line-height: 1.2; margin: 10px 0; }
   .date { letter-spacing: 3px; font-size: 13px; color: var(--muted); }
 
-  /* === Invitation Card === */
   .card-wrap { padding: 60px 20px; background: #f8f5f7; }
   .invitation-card {
     border-radius: 15px; padding: 40px 20px;
     background: url('./background.jpg') center/cover no-repeat;
     position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
   }
-  .invitation-card::after {
-    content: ''; position: absolute; inset: 0; background: rgba(255,255,255,0.92); border-radius: 15px;
-  }
+  .invitation-card::after { content: ''; position: absolute; inset: 0; background: rgba(255,255,255,0.92); border-radius: 15px; }
   .invitation-inner { position: relative; z-index: 2; text-align: center; }
   .names { font-family: 'Great Vibes', cursive; font-size: 42px; color: var(--accent); margin: 15px 0; }
   
-  /* === Ceremony & Countdown === */
   .ceremony {
     height: 70vh; background: url('./dilruke_4.jpeg') center/cover no-repeat; position: relative;
     display: flex; align-items: center; justify-content: center; text-align: center; color: #fff;
@@ -131,31 +117,27 @@
   .countdown span { display: block; font-size: 20px; font-weight: 700; }
   .countdown label { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; }
 
-  /* === Map Section === */
+  /* MAP SECTION */
   .map-section { padding: 60px 20px; text-align: center; background: #fff; }
-  .map-container iframe { width: 100%; height: 300px; border-radius: 15px; border: 0; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+  .map-container { width: 100%; height: 350px; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.1); margin-bottom: 25px; }
+  .map-container iframe { width: 100%; height: 100%; border: 0; }
   .map-btn { 
-    display: inline-block; margin-top: 25px; padding: 12px 35px; 
+    display: inline-block; padding: 14px 40px; 
     background: var(--accent); color: #fff; text-decoration: none; border-radius: 30px; font-weight: 600;
   }
 
-  /* === Gallery === */
   .gallery { height: 70vh; position: relative; background: #000; overflow: hidden; }
   .gallery img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: 1.2s ease-in-out; }
   .gallery img.active { opacity: 1; }
 
-  /* === Wishes === */
   .wishes { padding: 60px 20px; text-align: center; background: #fdfdfd; }
-  .wishes-inner input, .wishes-inner textarea {
-    width: 100%; padding: 12px; margin-bottom: 12px; border-radius: 10px; border: 1px solid #ddd; font-family: 'Poppins';
-  }
+  .wishes-inner input, .wishes-inner textarea { width: 100%; padding: 12px; margin-bottom: 12px; border-radius: 10px; border: 1px solid #ddd; font-family: 'Poppins'; }
   .wishes-inner textarea { height: 90px; resize: none; }
   .wishes-inner button { width: 100%; padding: 14px; background: var(--accent); color: #fff; border: none; border-radius: 35px; font-weight: 600; cursor: pointer; }
 
   .footer-credit { padding: 40px 20px; background: #f4f4f4; text-align: center; font-size: 11px; color: #777; }
   .footer-credit img { width: 40px; display: block; margin: 10px auto 0; opacity: 0.8; }
 
-  /* Animations */
   @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
   .fade-up { animation: fadeUp 1.2s ease both; animation-play-state: paused; }
   </style>
@@ -185,13 +167,10 @@
           <p style="font-family: 'Playfair Display'; font-style: italic; font-size: 14px;">We cordially invite you to join us...</p>
           <div class="names">Ishara <br>& <br>Dilruke</div>
           <div style="margin: 15px 0; line-height: 1.8; font-size: 13px;">
-            Daughter of Mr. & Mrs. Wijerathne<br>
-            Son of Mr. & Mrs. Tissera
+            Daughter of Mr. & Mrs. Wijerathne<br>Son of Mr. & Mrs. Tissera
           </div>
           <footer style="font-weight: 700; color: #444; margin-top: 15px; font-size: 14px;">
-            Thursday, January 29, 2026<br>
-            09:00 AM - 01:00 PM<br>
-            Courtyard by Marriott, Colombo
+            Thursday, January 29, 2026<br>09:00 AM - 01:00 PM<br>Courtyard by Marriott, Colombo
           </footer>
         </div>
       </div>
@@ -210,13 +189,27 @@
       </div>
     </section>
 
-    <section class="map-section">
+<section class="map-section">
       <h2 style="font-family: 'Great Vibes'; font-size: 38px; color: var(--accent);">Location</h2>
-      <p style="margin-bottom: 20px; font-size: 13px;">Courtyard by Marriott, Colombo 02</p>
+      <p style="margin-bottom: 20px; font-size: 14px;">Courtyard by Marriott, Colombo 02</p>
+      
       <div class="map-container fade-up">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.787747833215!2d79.851651574872!3d6.915967018446294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae25916055a407f%3A0x67399511652f4a74!2sCourtyard%20by%20Marriott%20Colombo!5e0!3m2!1sen!2slk!4v1700000000000"></iframe>
+        <iframe 
+          width="100%" 
+          height="100%" 
+          style="border:0;" 
+          loading="lazy" 
+          allowfullscreen 
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.785246739999!2d79.85501867580644!3d6.916301318469588!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae25940c5bb8367%3A0xe72dd1728019c243!2sCourtyard%20by%20Marriott%20Colombo!5e0!3m2!1sen!2slk!4v1715800000000!5m2!1sen!2slk6">
+        </iframe>
       </div>
-      <a href="https://maps.app.goo.gl/3QW5rU6G4n4G6p4S9" target="_blank" class="map-btn">Get Directions</a>
+
+      <a href="https://www.google.com/maps/dir/?api=1&destination=Courtyard+by+Marriott+Colombo" 
+         target="_blank" 
+         class="map-btn">
+         Get Directions
+      </a>
     </section>
 
     <section class="gallery">
@@ -241,13 +234,11 @@
         <input id="guestName" type="text" placeholder="Your Name">
         <textarea id="guestMessage" placeholder="Your message..."></textarea>
         <button id="sendWish">Send Wishes via WhatsApp</button>
-        <div id="statusMsg" style="margin-top: 10px; font-size: 13px;"></div>
       </div>
     </section>
 
     <div class="footer-credit">
-      Designed & Developed by<br>
-      <strong>Four Elementz Events</strong>
+      Designed & Developed by<br><strong>Four Elementz Events</strong>
       <img src="./element_logo.png" alt="Logo">
     </div>
 
@@ -263,39 +254,24 @@
   const audio = document.getElementById('bgAudio');
   const musicBtn = document.getElementById('musicControl');
   
-  // 1. Intro Animation Logic
-  // Show button after 15 seconds OR when video finishes
   setTimeout(() => seeBtn.classList.add('show'), 15000);
   video.onended = () => seeBtn.classList.add('show');
 
   seeBtn.onclick = () => {
-    // Reveal main content
     intro.style.opacity = 0;
-    // UNLOCK SCROLLING
     wrapper.style.overflowY = 'auto'; 
-    
     setTimeout(() => { intro.style.display = 'none'; }, 1000);
-    
-    // Auto-play audio on interaction
-    audio.play().catch(() => console.log("Audio requires user interaction"));
+    audio.play().catch(() => console.log("Music play blocked"));
   };
 
-  // 2. Music Toggle Logic
   musicBtn.onclick = () => {
-    if (audio.paused) {
-      audio.play();
-      musicBtn.textContent = '🔊';
-    } else {
-      audio.pause();
-      musicBtn.textContent = '🔇';
-    }
+    if (audio.paused) { audio.play(); musicBtn.textContent = '🔊'; } 
+    else { audio.pause(); musicBtn.textContent = '🔇'; }
   };
 
-  // 3. Countdown Timer Logic
   const targetDate = new Date("January 29, 2026 09:30:00").getTime();
   setInterval(() => {
-    const now = new Date().getTime();
-    const diff = targetDate - now;
+    const diff = targetDate - new Date().getTime();
     if (diff > 0) {
       document.getElementById('days').textContent = Math.floor(diff / 86400000);
       document.getElementById('hours').textContent = Math.floor((diff % 86400000) / 3600000);
@@ -304,7 +280,6 @@
     }
   }, 1000);
 
-  // 4. Gallery Slideshow
   const imgs = document.querySelectorAll('.gallery img');
   let currentIdx = 0;
   setInterval(() => {
@@ -313,21 +288,16 @@
     imgs[currentIdx].classList.add('active');
   }, 3500);
 
-  // 5. Scroll Animations Trigger
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.style.animationPlayState = 'running'; });
   }, { root: wrapper, threshold: 0.1 });
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-  // 6. WhatsApp Wishing Logic
   document.getElementById("sendWish").onclick = function() {
     const name = document.getElementById("guestName").value.trim();
     const msg = document.getElementById("guestMessage").value.trim();
     if (name && msg) {
-      const waLink = `https://wa.me/94716363959?text=Hi Ishara %26 Dilruke, I'm ${name}. ${msg}`;
-      window.open(waLink, '_blank');
-    } else {
-      alert("Please enter both your name and a message.");
+      window.open(`https://wa.me/94716363959?text=Hi Ishara %26 Dilruke, I'm ${name}. ${msg}`, '_blank');
     }
   };
 </script>
