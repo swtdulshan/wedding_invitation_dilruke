@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ishara & Dilruke — Wedding Invitation</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+  :root {
+    --accent: #D4AF37;
+    --muted: rgba(255,255,255,0.9);
+  }
+
+  /* Force the background to look like a premium surface on laptop */
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: #1a1a1a; /* Dark background for desktop users */
+    display: flex;
+    justify-content: center;
+    overflow: hidden; /* Prevent double scrollbars */
+  }
+
+  /* THE MOBILE FRAME - Locked for all devices */
+  .main-wrapper {
+    width: 100%;
+    max-width: 500px; /* Standard Mobile Width */
+    background: #fff;
+    height: 100vh;
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-shadow: 0 0 60px rgba(0,0,0,0.8);
+    scroll-behavior: smooth;
+  }
+
+  /* Hide scrollbar for a cleaner look */
+  .main-wrapper::-webkit-scrollbar { display: none; }
+  .main-wrapper { -ms-overflow-style: none; scrollbar-width: none; }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Poppins', sans-serif; color: #111; }
+
+  /* === INTRO VIDEO (Locked to Frame) === */
+  #introVideo {
+    position: absolute; inset: 0;
+    background: #000;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 9999;
+    transition: opacity 1s ease;
+  }
+  #introVideo video { width: 100%; height: 100%; object-fit: cover; }
+  
+  #seeInvitationBtn {
+    position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%);
+    background: var(--accent); color: #fff; border: none;
+    font-size: 14px; font-weight: 600; padding: 14px 30px;
+    border-radius: 40px; cursor: pointer; opacity: 0; transition: opacity 1s ease;
+    white-space: nowrap;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+  }
+  #seeInvitationBtn.show { opacity: 1; }
+
+  /* === Hero Section === */
+  .hero {
+    height: 100vh; display: flex; align-items: flex-end; justify-content: center;
+    background: url('./dilruke_11.jpeg') center/cover no-repeat; position: relative; text-align: center;
+  }
+  .hero::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.4); }
+  .hero-inner { position: relative; z-index: 2; color: #fff; padding-bottom: 100px; width: 100%; }
+  
+  .top-sub { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--muted); letter-spacing: 2px; }
+  .couple {
+    font-family: 'Great Vibes', cursive;
+    font-size: 55px;
+    text-shadow: 0 3px 15px #000;
+    line-height: 1.1;
+    margin: 10px 0;
+  }
+  .date { letter-spacing: 4px; font-size: 14px; color: var(--muted); }
+
+  /* === Invitation Card === */
+  .card-wrap { padding: 60px 20px; background: #f8f5f7; }
+  .invitation-card {
+    border-radius: 15px; padding: 45px 25px;
+    background: url('./background.jpg') center/cover no-repeat;
+    position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  }
+  .invitation-card::after {
+    content: ''; position: absolute; inset: 0; background: rgba(255,255,255,0.92); border-radius: 15px;
+  }
+  .invitation-inner { position: relative; z-index: 2; text-align: center; }
+  .names { font-family: 'Great Vibes', cursive; font-size: 45px; color: var(--accent); margin: 15px 0; }
+  
+  /* === Ceremony === */
+  .ceremony {
+    height: 80vh; background: url('./dilruke_4.jpeg') center/cover no-repeat; position: relative;
+    display: flex; align-items: center; justify-content: center; text-align: center; color: #fff;
+  }
+  .ceremony::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.55); }
+  .ceremony-inner { position: relative; z-index: 2; padding: 20px; width: 100%; }
+  .countdown { display: flex; justify-content: center; gap: 8px; margin-top: 25px; }
+  .countdown div { background: rgba(255,255,255,0.15); padding: 12px 5px; border-radius: 8px; min-width: 70px; backdrop-filter: blur(5px); }
+  .countdown span { display: block; font-size: 22px; font-weight: 700; }
+  .countdown label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; }
+
+  /* === Map Section (FIXED LINKS) === */
+  .map-section { padding: 60px 20px; text-align: center; background: #fff; }
+  .map-container iframe { width: 100%; height: 350px; border-radius: 15px; border: 0; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+  .map-btn { 
+    display: inline-block; margin-top: 25px; padding: 14px 40px; 
+    background: var(--accent); color: #fff; text-decoration: none; border-radius: 30px; font-weight: 600;
+    transition: 0.3s;
+  }
+
+  /* === Gallery === */
+  .gallery { height: 75vh; position: relative; background: #000; overflow: hidden; }
+  .gallery img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: 1.2s ease-in-out; }
+  .gallery img.active { opacity: 1; }
+
+  /* === Wishes === */
+  .wishes { padding: 60px 20px; text-align: center; background: #fdfdfd; }
+  .wishes-inner input, .wishes-inner textarea {
+    width: 100%; padding: 14px; margin-bottom: 12px; border-radius: 10px; border: 1px solid #ddd; font-family: 'Poppins';
+  }
+  .wishes-inner textarea { height: 100px; resize: none; }
+  .wishes-inner button { width: 100%; padding: 16px; background: var(--accent); color: #fff; border: none; border-radius: 35px; font-weight: 600; cursor: pointer; }
+
+  .footer-credit { padding: 40px 20px; background: #f4f4f4; text-align: center; font-size: 12px; color: #777; }
+  .footer-credit img { width: 45px; display: block; margin: 12px auto 0; opacity: 0.8; }
+
+  /* Music Buttons */
+  .music-control {
+    position: absolute; right: 20px; bottom: 20px; width: 54px; height: 54px;
+    background: rgba(255,255,255,0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    z-index: 1000; cursor: pointer; font-size: 22px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  }
+
+  /* Animations */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
+  .fade-up { animation: fadeUp 1.2s ease both; animation-play-state: paused; }
+  </style>
+</head>
+
+<body>
+  <div class="main-wrapper" id="mainScrollArea">
+    
+    <div id="introVideo">
+      <video id="weddingIntro" src="./animation.mp4" autoplay muted playsinline></video>
+      <button id="seeInvitationBtn">Open Invitation</button>
+      <div class="music-control" id="introMusicControl">🔊</div>
+    </div>
+
+    <section class="hero">
+      <div class="hero-inner fade-up">
+        <div class="top-sub">The Marriage of</div>
+        <div class="couple">Ishara & Dilruke</div>
+        <div class="date">29 · 01 · 2026</div>
+      </div>
+    </section>
+
+    <section class="card-wrap" id="invitation">
+      <div class="invitation-card fade-up">
+        <div class="invitation-inner">
+          <p style="font-family: 'Playfair Display'; font-style: italic;">We cordially invite you to join us...</p>
+          <div class="names">Ishara <br>& <br>Dilruke</div>
+          <div style="margin: 20px 0; line-height: 1.8; font-size: 14px;">
+            Daughter of Mr. & Mrs. Wijerathne<br>
+            Son of Mr. & Mrs. Tissera
+          </div>
+          <footer style="font-weight: 700; color: #444; margin-top: 15px;">
+            Thursday, January 29, 2026<br>
+            09:00 AM - 01:00 PM<br>
+            Courtyard by Marriott, Colombo
+          </footer>
+        </div>
+      </div>
+    </section>
+
+    <section class="ceremony">
+      <div class="ceremony-inner fade-up">
+        <h2 style="font-family: 'Great Vibes'; font-size: 42px; margin-bottom: 5px;">Poruwa Ceremony</h2>
+        <p style="font-size: 14px;">Begins at 09:30 AM</p>
+        <div class="countdown">
+          <div><span id="days">0</span><label>Days</label></div>
+          <div><span id="hours">0</span><label>Hrs</label></div>
+          <div><span id="mins">0</span><label>Mins</label></div>
+          <div><span id="secs">0</span><label>Secs</label></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="map-section">
+      <h2 style="font-family: 'Great Vibes'; font-size: 40px; color: var(--accent);">Location</h2>
+      <p style="margin-bottom: 20px; font-size: 14px;">Courtyard by Marriott, Colombo 02</p>
+      <div class="map-container fade-up">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.771144186588!2d79.84888137587574!3d6.917961918451842!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2594191d4e9ad%3A0x643666d926b4845a!2sCourtyard%20by%20Marriott%20Colombo!5e0!3m2!1sen!2slk!4v1710000000000!5m2!1sen!2slk"></iframe>
+      </div>
+      <a href="https://www.google.com/maps/dir/?api=1&destination=Courtyard+by+Marriott+Colombo" target="_blank" class="map-btn">Get Directions</a>
+    </section>
+
+    <section class="gallery">
+      <img src="./dilruke_1.jpeg" class="active">
+      <img src="./dilruke_2.jpeg">
+      <img src="./dilruke_3.jpeg">
+      <img src="./dilruke_4.jpeg">
+      <img src="./dilruke_5.jpeg">
+      <img src="./dilruke_6.jpeg">
+      <img src="./dilruke_7.jpeg">
+      <img src="./dilruke_8.jpeg">
+      <img src="./dilruke_9.jpeg">
+      <img src="./dilruke_10.jpeg">
+      <img src="./dilruke_11.jpeg">
+      <img src="./dilruke_12.jpeg">
+      <img src="./dilruke_13.jpeg">
+      <img src="./dilruke_14.jpeg">
+      <img src="./dilruke_15.jpeg">
+      <img src="./dilruke_16.jpeg">
+
+      <div style="position: absolute; bottom: 20px; width: 100%; text-align: center; color: #fff; font-size: 14px; letter-spacing: 2px; text-transform: uppercase;">Our Moments</div>
+    </section>
+
+    <section class="wishes">
+      <h2 style="font-family: 'Great Vibes'; font-size: 38px; color: var(--accent);">Send Wishes</h2>
+      <div class="wishes-inner fade-up" style="margin-top: 20px;">
+        <input id="guestName" type="text" placeholder="Your Name">
+        <textarea id="guestMessage" placeholder="Your message for the couple..."></textarea>
+        <button id="sendWish">Send Wishes via WhatsApp</button>
+        <div id="statusMsg" style="margin-top: 10px; font-size: 13px;"></div>
+      </div>
+    </section>
+
+    <div class="footer-credit">
+      Designed & Developed by<br>
+      <strong>Four Elementz Events</strong>
+      <img src="./element_logo.png" alt="Logo">
+    </div>
+
+    <audio id="bgAudio" loop><source src="./guitar.mp3" type="audio/mpeg"></audio>
+    <div class="music-control" id="musicControl">🔊</div>
+
+  </div> <script>
+  const wrapper = document.getElementById('mainScrollArea');
+  const intro = document.getElementById('introVideo');
+  const video = document.getElementById('weddingIntro');
+  const seeBtn = document.getElementById('seeInvitationBtn');
+  const audio = document.getElementById('bgAudio');
+  
+  // 1. Intro Video Timing
+  setTimeout(() => seeBtn.classList.add('show'), 15000);
+  video.onended = () => seeBtn.classList.add('show');
+
+  // 2. Open Invitation Action
+  seeBtn.onclick = () => {
+    intro.style.opacity = 0;
+    setTimeout(() => { intro.style.display = 'none'; }, 1000);
+    audio.play().catch(e => console.log("Audio play blocked by browser"));
+  };
+
+  // 3. Music Controls
+  const toggleMusic = () => {
+    if (audio.paused) {
+      audio.play();
+      document.getElementById('introMusicControl').textContent = '🔊';
+      document.getElementById('musicControl').textContent = '🔊';
+    } else {
+      audio.pause();
+      document.getElementById('introMusicControl').textContent = '🔇';
+      document.getElementById('musicControl').textContent = '🔇';
+    }
+  };
+  document.getElementById('introMusicControl').onclick = toggleMusic;
+  document.getElementById('musicControl').onclick = toggleMusic;
+
+  // 4. Countdown Timer
+  const targetDate = new Date("January 29, 2026 09:30:00").getTime();
+  setInterval(() => {
+    const now = new Date().getTime();
+    const diff = targetDate - now;
+    if (diff > 0) {
+      document.getElementById('days').textContent = Math.floor(diff / 86400000);
+      document.getElementById('hours').textContent = Math.floor((diff % 86400000) / 3600000);
+      document.getElementById('mins').textContent = Math.floor((diff % 3600000) / 60000);
+      document.getElementById('secs').textContent = Math.floor((diff % 60000) / 1000);
+    }
+  }, 1000);
+
+  // 5. Gallery Slideshow
+  const imgs = document.querySelectorAll('.gallery img');
+  let currentIdx = 0;
+  setInterval(() => {
+    imgs[currentIdx].classList.remove('active');
+    currentIdx = (currentIdx + 1) % imgs.length;
+    imgs[currentIdx].classList.add('active');
+  }, 3500);
+
+  // 6. Scroll Animations (Modified for Frame Scroll)
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.style.animationPlayState = 'running'; });
+  }, { root: wrapper, threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // 7. WhatsApp Wishes Logic
+  document.getElementById("sendWish").onclick = function() {
+    const name = document.getElementById("guestName").value.trim();
+    const msg = document.getElementById("guestMessage").value.trim();
+    const status = document.getElementById("statusMsg");
+    if (!name || !msg) {
+      status.textContent = "Please enter your name and message!";
+      status.style.color = "red";
+      return;
+    }
+    const text = encodeURIComponent(`Hi Ishara & Dilruke, I'm ${name}. ${msg}`);
+    window.open(`https://wa.me/94716363959?text=${text}`, '_blank');
+    status.textContent = "Redirecting to WhatsApp...";
+    status.style.color = "green";
+  };
+</script>
+</body>
+</html>
